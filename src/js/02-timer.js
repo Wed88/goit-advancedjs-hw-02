@@ -34,11 +34,17 @@ const options = {
 flatpickr("input#datetime-picker", options);
 
 function onStartBtnClick() {
-  setInterval(() => {
-    if (userDate <= Date.now()) return;
+  const timerId =  setInterval(() => {
+    const differenceTime = userDate - Date.now();
+    if (differenceTime < 0) {
+     clearInterval(timerId);
+     imputEl.removeAttribute("disabled");
+     return
+    };
     startBtnEl.setAttribute("disabled", true);
     imputEl.setAttribute("disabled", true);
     const currentTime = convertMs(userDate - Date.now());
+    console.log(currentTime);
 
     daysEl.textContent = addLeadingZero(currentTime.days);
     hoursEl.textContent = addLeadingZero(currentTime.hours);
