@@ -14,6 +14,8 @@ formEl.addEventListener("submit", event => {
     createPromise(i, delayPromise).then(onFulfilled).catch(onRejected);
     delayPromise += Number(step.value);
   }
+
+  event.currentTarget.reset();
 });
 
 function createPromise(position, delay) {
